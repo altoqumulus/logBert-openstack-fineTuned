@@ -36,14 +36,17 @@ class MLMDataset(Dataset):
 
 if __name__ == '__main__':
     STRUCTURED_LOG_PATH = "OpenStack_2k.log_structured.csv"
+    
     df = load_structured_logs(STRUCTURED_LOG_PATH)
-    sequences = group_by_session(df, window_size=20)
+    sequences = group_by_session(df, window_size=5)
     labels = [0] * len(sequences)  # dummy labels since MLM doesn't need true labels
     train_seqs, _, _, _ = split_data(sequences, labels, test_size=0.2)
     vocab = sorted(set(token for seq in train_seqs for token in seq))
 
     tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
     tokenizer.add_tokens(vocab + ['[DIST]'])
+
+    #import pdb; pdb.set_trace()
 
     train_dataset = MLMDataset(train_seqs, tokenizer)
 

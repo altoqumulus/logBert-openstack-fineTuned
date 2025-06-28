@@ -1,0 +1,17 @@
+# Core model & fine-tune
+transformers==4.40.1
+accelerate>=0.21.0            # required by Trainer
+# CUDA 12.1 wheels (install with the extra-index URL)
+torch==2.2.0+cu121
+torchvision==0.17.0+cu121
+torchaudio==2.2.0+cu121
+
+# Data processing & metrics
+scikit-learn>=1.3.0
+pandas>=2.0.0
+numpy>=1.23.0
+
+# Plotting
+matplotlib>=3.7.0
+
+drain3
